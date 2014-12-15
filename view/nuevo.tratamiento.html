@@ -1,0 +1,120 @@
+<div class="row col-lg-12">
+
+	<div class="row" ng-show="mostrarPanelResultado">
+		<div class="col-lg-12">
+			<div class="alert alert-dismissable {{ panelResultado.tipo }}">
+				<button type="button" class="close" ng-click="esconderPanel()">×</button>
+				<strong>{{ panelResultado.titulo }}</strong> - {{ panelResultado.mensaje }}
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<h3>Nuevo tratamiento</h3>
+	</div>
+
+	<div class="row well">
+		<div class="row col-lg-12">
+			<div class="col-lg-8">
+				<span>Empleado</span>
+				<angucomplete-alt id="idEmpleado"
+				                  placeholder="Empleado"
+				                  pause="100"
+				                  selected-object="nuevoEmpleadoElegido"
+				                  local-data="listaEmpleados"
+				                  search-fields="legajo,nombre"
+				                  title-field="legajo,nombre"
+				                  minlength="1"
+				                  input-class="form-control"
+				                  filtrar=""
+				                  filter-field="nombre"
+				                  match-class="highlight"
+				                  limit-results="15"
+				                  auto-match="true"></angucomplete-alt>
+				<br>
+			</div>
+			<div class="col-lg-4">
+				<span>Tipo de licencia</span>
+				<select class="form-control" ng-change="setearInterfaz()" ng-model="tratamiento.tipolic" ng-options="tipolic.codlic as (tipolic.codlic + ' - ' + tipolic.descripcion) for tipolic in listaTiposLicencias">
+				</select>
+				<br>
+			</div>
+			<br>
+		</div>
+		<div class="row col-lg-12" ng-show="tratamiento.tipolic == 'CT' || tratamiento.tipolic == 'LT'">
+			<div class="center-block">
+				<span>Enfermedad</span>
+				<angucomplete-alt id="idEnfermedad"
+				                  placeholder="Enfermedad"
+				                  pause="100"
+				                  selected-object="nuevaEnfermedadElegida"
+				                  local-data="listaEnfermedades"
+				                  search-fields="codigo,enfermedad"
+				                  title-field="enfermedad"
+				                  minlength="1"
+				                  input-class="form-control"
+				                  filtrar=""
+				                  filter-field="enfermedad"
+				                  match-class="highlight"
+				                  limit-results="15"
+				                  outside-model="nuevaAltaEnfermedad"
+				                  auto-match="true"></angucomplete-alt>
+			</div>
+			<br>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="input-group col-lg-6 col-lg-offset-2">
+					<span class="input-group-btn"><button class="btn btn-default" ng-click="openDate($event); openFechaInicio = !openFechaInicio;">Fecha de inicio <span class="glyphicon glyphicon-calendar"></span></button></span>
+					<input id="fechaInicio" readonly type="text" class="form-control" ng-keyup="hitEnter($event)" datepicker-popup="{{formatDate}}" ng-model="fechaInicio" is-open="openFechaInicio" datepicker-options="dateOptions" show-button-bar="false" />
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="input-group col-lg-6 col-lg-offset-2">
+					<span class="input-group-addon">Dìas otorgados</span>
+					<input type="text" ng-change="actualizarFecha('alta')" ng-model="diasAgregados" class="form-control" placeholder="Días agregados" numbers-only/>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="input-group col-lg-6 col-lg-offset-2">
+					<span class="input-group-btn"><button class="btn btn-default" ng-click="openDate($event); openNuevaAlta = !openNuevaAlta;">Fecha de alta <span class="glyphicon glyphicon-calendar"></span></button></span>
+					<input id="fechaAlta" readonly type="text" class="form-control" ng-change="actualizarDias('alta')" datepicker-popup="{{formatDate}}" ng-model="nuevaAlta" is-open="openNuevaAlta" datepicker-options="dateOptions" show-button-bar="false" min-date="tratamiento.fechaalta" />
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="input-group col-lg-6 col-lg-offset-2">
+					<span class="input-group-addon">Estado</span>
+					<select id="filtros.estado" class="form-control" ng-model="tratamiento.estadolic">
+						<option value="" disabled>Seleccionar Estado</option>
+						<option value="C">Con licencia</option>
+						<option value="A">De alta</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="input-group col-lg-12 col-lg-offset-2">
+				<span class="input-group-addon">Descripción</span>
+				<textarea ng-model="tratamiento.desctrat" placeholder="Ingrese descripción" style="resize: none; width: 600px"></textarea>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row hidden-print">
+	<div class="col-lg-12">
+		<span class="col-lg-10 left">
+			<button class="btn btn-default" ng-click="volver()"><span class="glyphicon glyphicon-arrow-left"></span> Volver</button>
+		</span>
+		<span class="col-lg-2 right">
+			<button class="btn btn-primary" ng-click="guardarTratamiento()"><span class="glyphicon glyphicon-save"></span> Guardar cambios</button>
+		</span>
+	</div>
+</div>
+<br>

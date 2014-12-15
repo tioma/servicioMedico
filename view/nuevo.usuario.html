@@ -1,0 +1,55 @@
+<div class="row" ng-show="mostrarPanelUsuario">
+	<div class="col-lg-12">
+		<div class="alert alert-dismissable {{ panelUsuario.tipo }}">
+			<button type="button" class="close" ng-click="esconderPanelUsuario()">×</button>
+			<strong>{{ panelUsuario.titulo }}</strong> - {{ panelUsuario.mensaje }}
+		</div>
+	</div>
+</div>
+
+<div class="well col-lg-12">
+	<form class="bs-example form-horizontal">
+		<fieldset>
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">Usuario</span>
+					<input type="text" ng-model="usuario.usuario" class="form-control" placeholder="Usuario"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-12">
+					<input type="checkbox" ng-model="usuario.tratamientos"> Tratamientos
+				</div>
+				<br>
+					<span>
+						<h5 class="col-lg-offset-1">- Permite visualizar los tratamientos, crear nuevos, modificarlos, eliminarlos como así también darlos de alta.</h5>
+					</span>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-12">
+					<input type="checkbox" ng-model="usuario.listados"> Listados
+				</div>
+				<br>
+					<span>
+						<h5 class="col-lg-offset-1">- Permite el acceso a la sección de listados para consulta e impresión.</h5>
+					</span>
+			</div>
+			<div class="form-group">
+				<div class="col-lg-12">
+					<input type="checkbox" ng-model="usuario.parametros"> Parámetros
+				</div>
+				<br>
+					<span>
+						<h5 class="col-lg-offset-1">- Permite el acceso a la sección de seguridad, pudiendo modificar los permisos de los usuarios dentro del sistema como así también dar acceso a nuevos usuarios.</h5>
+					</span>
+			</div>
+			<div class="form-group">
+				<br>
+				<div class="col-lg-12 text-right">
+					<button class="btn btn-primary" ng-click="guardarNuevoUsuario()"><span class="glyphicon glyphicon-save"></span> Guardar</button>
+					<button class="btn btn-default" ng-click="cancelar()"><span class="glyphicon glyphicon-arrow-left"></span> Volver</button>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</div>

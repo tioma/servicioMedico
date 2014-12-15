@@ -1,0 +1,42 @@
+<div class="container" ng-controller="loginCtrl">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="xpage-header">
+				<h1> Acceso</h1>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row col-lg-6 well">
+		<form ng-submit="login()" class="bs-example form-horizontal">
+			<fieldset>
+				<legend>Usuario</legend>
+				<div class="form-group">
+					<label for="inputEmail" class="col-lg-3 control-label"><span class="glyphicon glyphicon-user"></span> Usuario</label>
+					<div class="col-lg-9">
+						<input type="text" class="form-control" ng-model="email" id="inputEmail" placeholder="Ingresar usuario o correo electrónico" ng-required="true" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword" class="col-lg-3 control-label"><span class="glyphicon glyphicon-asterisk"></span> Contraseña</label>
+					<div class="col-lg-9">
+						<input type="password" class="form-control" ng-model="password" id="inputPassword" placeholder="Ingresar contraseña" ng-required="true" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<br>
+					<div class="col-lg-4 text-center">
+						<input type="checkbox" ng-model="sesion">No cerrar sesi&oacute;n
+					</div>
+					<div class="col-lg-8 text-right">
+						<button type="submit" class="btn btn-primary" ng-disabled="entrando"><span class="glyphicon glyphicon-log-in"></span> Ingresar</button>
+						<button type="button" ui-sref="changepass" class="btn"><span class="glyphicon glyphicon-lock"></span> Cambiar contraseña</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+</div>

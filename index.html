@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+
+<head>
+	<title>Sistema de Servicio M&eacute;dico</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.flaty.css">
+	<link rel="stylesheet" href="css/angucomplete-alt.css">
+	<link rel="stylesheet" href="EstilosIntegrador.css" type="text/css">
+	<link rel="stylesheet" href="css/dialogs.css">
+	<link rel="icon" type="image/png" href="img/medico.png">
+	<!-- Less test -->
+	<!--<link rel="stylesheet/less" type="text/css" href="less/bootstrap.cerulean.less"/>
+	<script src="angular/less-1.7.3.min.js" type="text/javascript"></script>-->
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]-->
+	<script src="angular/html5.js"></script>
+	<!--[endif]-->
+	<!-- Angular 1.2.4 y modulos-->
+	<script src="angular/angular.min.js"></script>
+	<script src="angular/angular-cookies.min.js"></script>
+	<script src="angular/angular-locale_es-ar.js"></script>
+	<script src="angular/angular-sanitize.min.js"></script>
+	<script src="angular/angular-ui-router.min.js"></script>
+	<script src="angular/socket.io.min.js"></script>
+	<script src="angular/ui-bootstrap-tpls-min.js"></script>
+	<!-- Google charts -->
+	<script src="angular/jsapi.js"></script>
+	<!-- App Script -->
+	<script src="includes/js/utils/config.js"></script>
+	<script src="controller/main.js"></script>
+	<!-- Services -->
+	<script src="service/formatdate.js"></script>
+	<script src="service/login.js"></script>
+	<!-- Filters -->
+	<script src="filter/filters.js"></script>
+	<!-- Factory -->
+	<script src="factory/angucomplete-alt.js"></script>
+	<script src="factory/auth.js"></script>
+	<script src="factory/chartDirectives.js"></script>
+	<script src="factory/tratamientos.js"></script>
+	<script src="factory/enfermedades.js"></script>
+	<script src="factory/empleados.js"></script>
+	<!-- Controles Angular-->
+	<script src="controller/filtros.js"></script>
+	<script src="controller/navigation.js"></script>
+	<script src="controller/dialogs.js"></script>
+	<script src="controller/login.js"></script>
+	<script src="controller/tratamientos.js"></script>
+	<script src="controller/seguridad.js"></script>
+	<script src="controller/licenciasAcumuladas.js"></script>
+	<script src="controller/enfermedades.js"></script>
+	<!-- Directives -->
+	<script src="directives/paginacion.js"></script>
+	<script src="directives/filtrosTratamientos.js"></script>
+	<script src="directives/tablaTratamientos.js"></script>
+	<script src="directives/fichaTratamiento.js"></script>
+	<script src="directives/evolucionTratamiento.js"></script>
+	<script src="directives/onlyNumbers.js"></script>
+	<script src="directives/divPanel.js"></script>
+	<script src="directives/formularioTratamiento.js"></script>
+	<script src="directives/tablaProximasAltas.js"></script>
+	<script src="directives/tablaUsuarios.js"></script>
+	<script src="directives/nuevoUsuario.js"></script>
+	<script src="directives/acumuladosAgente.js"></script>
+	<script src="directives/formularioEnfermedades.js"></script>
+	<script src="directives/tablaListados.js"></script>
+	<!-- Otros -->
+	<!--<script type="text/javascript" src="./jquery.js"></script>
+	<script type="text/javascript" src="./jMenu.js"></script>
+	<script type="text/javascript" src="blue-menu.files/dmenu.js"></script>-->
+	<script src="angular/styleswitcher.js"></script>
+</head>
+<body class="container" ng-controller="navigationCtrl">
+
+<div class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a ng-click="irA()" class="nav navbar-brand hidden-lg"><img src="img/LogoPUERTO.png" width="30" height="30"> AGP S.E.</a>
+			<a ng-click="irA()" class="nav navbar-brand visible-lg"><img src="img/LogoPUERTO.png" width="30" height="30"> Administración General de Puertos</a>
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse" ng-show="acceso!=''" ng-click="isCollapsed = !isCollapsed">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="navbar-collapse collapse navbar-responsive-collapse" collapse="!isCollapsed">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" ng-show="tratamientos == 1" >Tratamientos<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a ng-click="isCollapsed = false" ui-sref="tratamientos">Maestro tratamientos</a></li>
+						<li><a ng-click="isCollapsed = false" ui-sref="proximasAltas">Próximas altas</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" ng-show="parametros == 1">Supervisión<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a ng-click="isCollapsed = false" ui-sref="enfermedades">ABM Enfermedades</a></li>
+						<li><a ng-click="isCollapsed = false" ui-sref="actualizarLicencias">Actualización de licencias acumuladas</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" ng-show="listados == 1">Listados<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a ng-click="isCollapsed = false" ui-sref="listados">Generador de listados</a></li>
+						<li><a ng-click="isCollapsed = false">Licencias acumuladas</a></li>
+						<li><a ng-click="isCollapsed = false">Vencimientos</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" ng-show="listados == 1">Estadísticas<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a ng-click="isCollapsed = false">Detalle por período</a></li>
+						<li><a ng-click="isCollapsed = false">Ranking de enfermedades por licencias</a></li>
+						<li><a ng-click="isCollapsed = false">Ranking de empleados</a></li>
+						<li><a ng-click="isCollapsed = false">Licencias por año</a></li>
+					</ul>
+				</li>
+				<li><a ng-click="isCollapsed = false" ui-sref="seguridad" ng-show="parametros == 1">Seguridad</a></li>
+				<li class="dropdown">
+					<a href class="dropdown-toggle" data-toggle="dropdown" ng-show="usuario != ''"><span class="glyphicon glyphicon-user"></span> {{ usuario }}<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a ng-click="salir(); isCollapsed = false;" ><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<br/><br/>
+	<div ui-view></div>
+</div>
+
+</body>
+
+</html>

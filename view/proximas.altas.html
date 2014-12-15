@@ -1,0 +1,17 @@
+<div class="container" ng-controller="tratamientosCtrl">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1><img src="img/tratamientos.png" height="64" width="80">Próximas altas</h1>
+		</div>
+	</div>
+
+	<div ng-hide="verFichaTratamiento">
+		<tabla-proximas-altas></tabla-proximas-altas>
+	</div>
+
+	<div class="row" ng-show="verFichaTratamiento">
+		<ficha-tratamiento></ficha-tratamiento>
+	</div>
+
+</div>

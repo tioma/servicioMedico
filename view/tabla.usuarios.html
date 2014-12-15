@@ -1,0 +1,78 @@
+<div class="row" ng-show="mostrarPanelResultado">
+	<div class="col-lg-12">
+		<div class="alert alert-dismissable {{ panelResultado.tipo }}">
+			<button type="button" class="close" ng-click="esconderPanel()">×</button>
+			<strong>{{ panelResultado.titulo }}</strong> - {{ panelResultado.mensaje }}
+		</div>
+	</div>
+</div>
+
+<div class="row" ng-hide="listaUsuarios.length == 0">
+	<div class="col-lg-2">
+		<div class="bs-example table-responsive well">
+			<table class="table table-striped table-bordered table-hover">
+				<thead>
+				<tr class="cabeceraTabla">
+					<th>
+						<span class="glyphicon glyphicon-user"></span>
+						<strong> Usuario</strong>
+					</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="usuario in usuariosFiltrados = (listaUsuarios | startFrom: (currentPage-1)*itemsPerPage | limitTo:itemsPerPage | filter:search)">
+					<td><a href ng-click="seleccionar(usuario)"><span class="glyphicon glyphicon-check"></span> {{ usuario.usuario }}</a></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="well col-lg-10">
+		<form class="bs-example form-horizontal">
+			<fieldset>
+				<div class="form-group">
+					<span>
+						<h3 class="text-center">{{ usuario.usuario }}</h3>
+					</span>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-12">
+						<input type="checkbox" ng-model="usuario.tratamientos"> Tratamientos
+					</div>
+					<br>
+					<span>
+						<h5 class="col-lg-offset-1">- Permite visualizar los tratamientos, crear nuevos, modificarlos, eliminarlos como así también darlos de alta.</h5>
+					</span>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-12">
+						<input type="checkbox" ng-model="usuario.listados"> Listados
+					</div>
+					<br>
+					<span>
+						<h5 class="col-lg-offset-1">- Permite el acceso a la sección de listados para consulta e impresión.</h5>
+					</span>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-12">
+						<input type="checkbox" ng-model="usuario.parametros"> Parámetros
+					</div>
+					<br>
+					<span>
+						<h5 class="col-lg-offset-1">- Permite el acceso a la sección de seguridad, pudiendo modificar los permisos de los usuarios dentro del sistema como así también dar acceso a nuevos usuarios.</h5>
+					</span>
+				</div>
+				<div class="form-group">
+					<br>
+					<div class="col-lg-12 text-right">
+						<button class="btn btn-primary" ng-click="guardar()"><span class="glyphicon glyphicon-save"></span> Guardar</button>
+						<button class="btn btn-danger" ng-click="eliminar()"><span class="glyphicon glyphicon-remove-circle"></span> Eliminar</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	<div-pagination total-items="totalItems" current-page="currentPage"></div-pagination>
+</div>

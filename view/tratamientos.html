@@ -1,0 +1,25 @@
+<div class="container" ng-controller="tratamientosCtrl">
+
+	<div class="row">
+		<div class="col-lg-6">
+			<h1><img src="img/tratamientos.png" height="64" width="80">Tratamientos</h1>
+		</div>
+		<div class="col-lg-6 text-right">
+			<br>
+			<button class="btn btn-primary" ng-click="nuevoTratamiento()"><span class="glyphicon glyphicon-plus-sign"></span> Nuevo tratamiento</button>
+		</div>
+	</div>
+
+	<div class="row" ng-hide="verFichaTratamiento || verNuevoTratamiento">
+		<tabla-tratamientos></tabla-tratamientos>
+	</div>
+
+	<div class="row" ng-show="verFichaTratamiento">
+		<ficha-tratamiento></ficha-tratamiento>
+	</div>
+
+	<div class="row" ng-show="verNuevoTratamiento">
+		<formulario-tratamiento></formulario-tratamiento>
+	</div>
+
+</div>
